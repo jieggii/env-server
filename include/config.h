@@ -14,13 +14,13 @@ namespace config {
          */
         constexpr uint16_t port = 80;
     }  // namespace httpServer
-    namespace env_sensor {
+    namespace blynk {
         /*
-         * Measurement period in seconds.
-         * For example, if set to 5000, measurements will be performed once per 5 seconds.
+         * Push measurements interval in milliseconds.
+         * For example, if set to 5000, measurements will be pushed to Blynk once per 5 seconds.
          */
-        constexpr uint32_t measurement_period = 30 * 1000UL;
-    }  // namespace env_sensor
+        constexpr uint32_t push_interval = 5 * 60 * 1000UL;
+    }  // namespace blynk
 }  // namespace config
 
 #endif  // CONFIG_H

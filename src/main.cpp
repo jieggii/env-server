@@ -10,9 +10,10 @@
 #include "secrets.h"
 #include <http_server.h>
 
-uint32_t LAST_MEASUREMENT_TS = 0;
+uint32_t LAST_PUSH_TS = 0;          // timestamp when the measurements were pushed to blynk last time
+uint32_t LAST_MEASUREMENTS_TS = 0;  // timestamp when the measurements were read last time
 env_sensor::EnvSensor ENV_SENSOR;
-HTTPServer SERVER(config::httpServer::port, ENV_SENSOR, LAST_MEASUREMENT_TS);
+HTTPServer SERVER(config::httpServer::port, ENV_SENSOR, LAST_MEASUREMENTS_TS);
 
 void setup() {
     delay(1000);
@@ -40,22 +41,22 @@ void setup() {
 }
 
 void loop() {
-    // perform env sensor measurements if it is time to:
-    if (const uint32_t now = millis(); now - LAST_MEASUREMENT_TS >= config::env_sensor::measurement_period) {
-        LAST_MEASUREMENT_TS = millis();
+    // perform env sensor measurements
+    if (ENV_SENSOR.measure()) {
+        LAST_MEASUREMENTS_TS = millis();
+        Serial.println("fresh measurements are available");
+    }
 
-        const bool freshMeasurementsAvailable = ENV_SENSOR.measure();
-        Serial.println("env measurement has been performed");
+    // push measurements to Blynk if it is time to do that:
+    if (const uint32_t now = millis(); now - LAST_PUSH_TS >= config::blynk::push_interval || LAST_PUSH_TS == 0) {
+        LAST_PUSH_TS = now;
 
-        if (freshMeasurementsAvailable) {
-            // push measurement updates to Blynk if fresh measurements are available
-            const auto [temperature, humidity, co2] = ENV_SENSOR.readMeasurements();
-            Blynk.virtualWrite(V0, temperature);
-            Blynk.virtualWrite(V1, humidity);
-            Blynk.virtualWrite(V2, co2);
+        const auto [temperature, humidity, co2] = ENV_SENSOR.readMeasurements();
+        Blynk.virtualWrite(V0, temperature);
+        Blynk.virtualWrite(V1, humidity);
+        Blynk.virtualWrite(V2, co2);
 
-            Serial.println("fresh measurements have been pushed to Blynk");
-        }
+        Serial.println("measurements have been pushed to Blynk");
     }
 
     // handle Blynk:
