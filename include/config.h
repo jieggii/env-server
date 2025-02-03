@@ -24,8 +24,11 @@ namespace config {
     }  // namespace blynk
 
     namespace env_sensor {
+        /**
+         * Temperature offset in C for the SCD40 sensor.
+         */
         constexpr float temperatureOffset = 6.0f;
-    }
+    }  // namespace env_sensor
 }  // namespace config
 
 #endif  // CONFIG_H
