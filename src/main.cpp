@@ -23,7 +23,7 @@ void setup() {
 
     // init SCD40:
     Wire.begin(D2, D1);  // init i2c
-    if (!ENV_SENSOR.setup()) {
+    if (const bool ok = ENV_SENSOR.setup(config::env_sensor::temperatureOffset); !ok) {
         Serial.println("failed to set up env sensor, restarting in 1 second...");
         delay(1000);
         ESP.restart();  // NOLINT

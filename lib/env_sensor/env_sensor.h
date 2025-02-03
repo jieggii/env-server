@@ -26,9 +26,10 @@ namespace env_sensor {
        public:
         /**
          * Set up the sensor.
+         * @param temperatureOffset temperature offset in C.
          * @return true if set up successful.
          */
-        bool setup();
+        bool setup(float temperatureOffset);
 
         /**
          * Perform measurements.

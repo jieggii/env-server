@@ -14,6 +14,7 @@ namespace config {
          */
         constexpr uint16_t port = 80;
     }  // namespace httpServer
+
     namespace blynk {
         /*
          * Push measurements interval in milliseconds.
@@ -21,6 +22,10 @@ namespace config {
          */
         constexpr uint32_t push_interval = 5 * 60 * 1000UL;
     }  // namespace blynk
+
+    namespace env_sensor {
+        constexpr float temperatureOffset = 6.0f;
+    }
 }  // namespace config
 
 #endif  // CONFIG_H
