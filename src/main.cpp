@@ -24,9 +24,9 @@ void setup() {
     // init SCD40:
     Wire.begin(D2, D1);  // init i2c
     if (!ENV_SENSOR.setup()) {
-        Serial.println("failed to set up env sensor, please reboot");
-        while (true) {
-        }
+        Serial.println("failed to set up env sensor, restarting in 1 second...");
+        delay(1000);
+        ESP.restart();  // NOLINT
     }
 
     // init Blynk (it will also manage Wi-Fi connection):
