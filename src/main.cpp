@@ -37,7 +37,8 @@ void setup() {
     // set up and start the HTTP server:
     SERVER.setup();
     SERVER.begin();
-    Serial.println("HTTP server is listening");
+    Serial.print("HTTP server is listening on port ");
+    Serial.println(config::httpServer::port);
 }
 
 void loop() {
