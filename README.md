@@ -1,6 +1,5 @@
 # env-server
-A tiny environmental measurements server constantly pushing current environmental measurements to your Blynk dashboard.
-You can also access readings through simple HTTP interface as esp8266 exposes `/measurements` endpoint.
+A compact environmental measurement server for the ESP8266 that streams real-time data to your Blynk dashboard and exposes a simple HTTP `/measurements` endpoint for easy access.
 
 ![blynk preview](https://imgur.com/CDxWU6B.jpg)
 
@@ -16,7 +15,6 @@ You can also access readings through simple HTTP interface as esp8266 exposes `/
 | `SDA`     | `D2`        |
 | `VCC`     | `5V`        |
 | `GND`     | `GND`       |
-
 
 ## Setup
 Before building the project, please make sure to create `include/secrets.h` file using `include/secrets.h.template` as a template. Fill in your WiFi and Blynk credentials.
