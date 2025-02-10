@@ -16,8 +16,6 @@ env_sensor::EnvSensor ENV_SENSOR;
 HTTPServer SERVER(config::httpServer::port, ENV_SENSOR, LAST_MEASUREMENTS_TS);
 
 void setup() {
-    delay(1000);
-
     Serial.begin(9600);
     Serial.println("starting...");
 
