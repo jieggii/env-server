@@ -20,7 +20,7 @@ namespace config {
          * Push measurements interval in milliseconds.
          * For example, if set to 5000, measurements will be pushed to Blynk once per 5 seconds.
          */
-        constexpr uint32_t push_interval = 5 * 60 * 1000UL;
+        constexpr uint32_t push_interval = 15 * 60 * 100UL;
     }  // namespace blynk
 
     namespace env_sensor {
